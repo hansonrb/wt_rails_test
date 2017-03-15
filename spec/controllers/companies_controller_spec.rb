@@ -14,4 +14,15 @@ RSpec.describe CompaniesController, type: :controller do
       expect(json.size).to eq 5
     end
   end
+
+  describe 'POST create' do
+    it 'creates company and return company' do
+      expect {
+        post :create, params: { company: { name: "TEST" } }
+      }.to change(Company, :count).by(1)
+
+      company = Company.last
+      expect(company.name).to eq("TEST")
+    end
+  end
 end
